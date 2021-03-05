@@ -1,0 +1,114 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.splashscreen {
+  flex: 1;
+  background: url("../assets/images/unsplash2.png") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.logo {
+  position: absolute;
+  bottom: 25px;
+  width: 350px;
+  height: auto;
+  right: 150px;
+}
+
+.content {
+  width: 500px;
+  height: 100vh;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentHeader {
+  height: 100px;
+  display: flex;
+  /* justify-content:  */
+  align-items: center;
+  /* margin-left: 10px; */
+  margin-top: 10px;
+}
+
+.title {
+  font-weight: bold;
+  text-transform: uppercase;
+  justify-content: center;
+  margin-left: 150px;
+  font-size: large;
+  text-align: center;
+}
+
+.logoBack {
+  height: 40px;
+  width: auto;
+}
+
+.form {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding-top: 10px;
+}
+
+.contentButton {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.clustButton {
+  display: flex;
+  flex-direction: column;
+  height: 150px;
+  justify-content: center;
+}
+
+.button {
+  height: 50px;
+  width: 150px;
+  border: 1px solid #707070;
+  border-radius: 19px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+}
+
+.button:first-child {
+  margin-bottom: 15px;
+}
+
+.logoButton {
+  width: 25px;
+  height: auto;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.dragAndDropContent {
+  height: 150px;
+  width: 150px;
+  border: 1px solid #707070;
+  border-radius: 19px;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  margin-right: 15px;
+}

@@ -1,0 +1,18 @@
+{
+  "name": "pdf-editor",
+  "productName": "PDF-Editor",
+  "version": "1.0.0",
+  "description": "React-TypeScript-Electron for editing pdf", 
+  "main": "./main.prod.js",
+  "author": {
+    "name": "NJG connect - Jeremy Nohile",
+    "email": "njgconnect@gmail.com",
+    "url": "https://njgconnect.fr"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ../.erb/scripts/BabelRegister.js ../.erb/scripts/ElectronRebuild.js",
+    "postinstall": "yarn electron-rebuild"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}

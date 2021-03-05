@@ -1,0 +1,92 @@
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: row;
+  overflow: hidden;
+}
+
+.splashscreen {
+  flex: 1;
+  background: url("../assets/images/unsplash1.png") no-repeat center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+.logo {
+  position: absolute;
+  top: 25px;
+  right: 325px;
+  width: 350px;
+  height: auto;
+}
+
+.content {
+  width: 500px;
+  height: 100vh;
+  overflow: scroll;
+  display: flex;
+  flex-direction: column;
+}
+
+.contentAvatar {
+  height: 200px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 10px;
+  margin-top: 10px;
+}
+
+.username {
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+.logoAvatar {
+  height: 75px;
+  width: auto;
+}
+
+.form {
+  display: flex;
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+
+.contentButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.button {
+  height: 50px;
+  width: 250px;
+  background-color: #26a9e0;
+  border-radius: 30px;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  display: flex;
+  color: white;
+}
+
+.logoMore {
+  height: 30px;
+  width: auto;
+}
+.contentlogoMore {
+  margin-bottom: 25px;
+  margin-left: 10px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .appLogo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
