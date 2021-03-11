@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
 import images from '../assets/images';
 import { SelectWithSearchBar } from '../components';
-// import styles from './Home.css';
 import styles from './Home.module.css';
 
 interface Props {
   onCreateUser: () => void;
+  onUpdateUser: (value: number) => void;
+  peopleSelect: string[];
 }
 
-const data = ['XYZ-jeremy nohile', 'ABC-cindy de la fuente'];
-
-const Home = ({ onCreateUser }: Props) => {
+const Home = ({ onCreateUser, peopleSelect = [], onUpdateUser }: Props) => {
   const [search] = useState(undefined);
   return (
     <div className={styles.container}>
@@ -26,10 +25,8 @@ const Home = ({ onCreateUser }: Props) => {
           <SelectWithSearchBar
             placeholder="Immatriculation, Nom client, ..."
             value={search}
-            data={data}
-            onSelectIndex={(value) => {
-              console.log('value : ', value);
-            }}
+            data={peopleSelect}
+            onSelectIndex={(value) => onUpdateUser(value)}
           />
           <div
             className={styles.contentlogoMore}

@@ -10,6 +10,8 @@ interface Props {
   list?: string;
   id?: string;
   name?: string;
+  onBlur?: () => void;
+  disabled?: boolean;
 }
 
 function TextInput({
@@ -20,6 +22,8 @@ function TextInput({
   list,
   id,
   name,
+  disabled,
+  onBlur,
 }: Props) {
   return (
     <div className={styles.group}>
@@ -33,6 +37,8 @@ function TextInput({
         list={list}
         id={id}
         name={name}
+        onBlur={onBlur}
+        disabled={disabled}
       />
       <span className={styles.bar} />
       <label>{label}</label>
@@ -46,6 +52,8 @@ TextInput.defaultProps = {
   list: undefined,
   id: undefined,
   name: undefined,
+  onBlur: () => {},
+  disabled: false,
 };
 
 export default TextInput;

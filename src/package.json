@@ -2,7 +2,7 @@
   "name": "pdf-editor",
   "productName": "PDF-Editor",
   "version": "1.0.0",
-  "description": "React-TypeScript-Electron for editing pdf", 
+  "description": "React-TypeScript-Electron for editing pdf",
   "main": "./main.prod.js",
   "author": {
     "name": "NJG connect - Jeremy Nohile",

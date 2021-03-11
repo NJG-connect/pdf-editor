@@ -5,10 +5,20 @@ import styles from './UserForm.module.css';
 import People, { marquesAuto, assurances } from '../types/people';
 import createId from '../utils/createId';
 
+interface Podeoded extends HTMLElement {
+  files?: OneFile[];
+}
+
+interface OneFile {
+  path: string;
+}
 interface Props {
   onGoBack: () => void;
   people?: People;
-  onSubmit: () => void;
+  onCreateTicket: () => void;
+  onSaveInfoUser: (value: People) => void;
+  onGeneratePDF: () => void;
+  onReadPDF: (path: string) => void;
 }
 
 const initialPeople: People = {
@@ -25,14 +35,39 @@ const initialPeople: People = {
   price: undefined,
 };
 
-const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
-  const [people, setInfoPeople] = useState(peopleProps || initialPeople);
+const UserForm = ({
+  onGoBack,
+  people: peopleProps,
+  onCreateTicket,
+  onSaveInfoUser,
+  onGeneratePDF,
+  onReadPDF,
+}: Props) => {
+  const [people, setInfoPeople] = useState(
+    peopleProps ? { ...initialPeople, ...peopleProps } : initialPeople
+  );
 
   useEffect(() => {
     if (peopleProps) {
       setInfoPeople(peopleProps);
     }
   }, [peopleProps]);
+
+  function onEntriesValue(newPeople?: People) {
+    if (newPeople) {
+      onSaveInfoUser(newPeople);
+    } else {
+      onSaveInfoUser(people);
+    }
+  }
+
+  function trySomething() {
+    const fileUpload: Podeoded | null = document.getElementById('file');
+    if (fileUpload && fileUpload.files && fileUpload.files.length) {
+      const { path } = fileUpload.files[0];
+      onReadPDF(path);
+    }
+  }
 
   return (
     <div className={styles.container}>
@@ -51,6 +86,7 @@ const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
               setInfoPeople({ ...people, immatrucalation: value });
             }}
             value={people.immatrucalation}
+            onBlur={() => onEntriesValue()}
           />
           <SelectWithSearchBar
             placeholder="Marque"
@@ -58,6 +94,7 @@ const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
             data={marquesAuto}
             onSelectIndex={(value) => {
               setInfoPeople({ ...people, marque: marquesAuto[value] });
+              onEntriesValue({ ...people, marque: marquesAuto[value] });
             }}
           />
           <TextInput
@@ -66,6 +103,7 @@ const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
               setInfoPeople({ ...people, modele: value });
             }}
             value={people.modele}
+            onBlur={() => onEntriesValue()}
           />
           <SelectWithSearchBar
             placeholder="Assurance"
@@ -73,6 +111,7 @@ const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
             data={assurances}
             onSelectIndex={(value) => {
               setInfoPeople({ ...people, assurance: assurances[value] });
+              onEntriesValue({ ...people, assurance: assurances[value] });
             }}
           />
           <TextInput
@@ -81,6 +120,7 @@ const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
               setInfoPeople({ ...people, propriétaire: value });
             }}
             value={people.propriétaire}
+            onBlur={() => onEntriesValue()}
           />
           <TextInput
             label="Mail :"
@@ -88,6 +128,7 @@ const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
               setInfoPeople({ ...people, email: value });
             }}
             value={people.email}
+            onBlur={() => onEntriesValue()}
           />
           <TextInput
             label="Date de Dépot :"
@@ -95,6 +136,7 @@ const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
               setInfoPeople({ ...people, dateDepot: new Date(value) });
             }}
             value={people.dateDepot ? people.dateDepot.toString() : ''}
+            onBlur={() => onEntriesValue()}
           />
           <TextInput
             label="Date de Récupération :"
@@ -104,6 +146,7 @@ const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
             value={
               people.dateRecuperation ? people.dateRecuperation.toString() : ''
             }
+            onBlur={() => onEntriesValue()}
           />
           <TextInput
             label="Controle Technique :"
@@ -111,6 +154,7 @@ const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
               setInfoPeople({ ...people, technicalControl: value });
             }}
             value={people.technicalControl}
+            onBlur={() => onEntriesValue()}
           />
           <TextInput
             label="Prix de Récupération :"
@@ -118,20 +162,51 @@ const UserForm = ({ onGoBack, people: peopleProps, onSubmit }: Props) => {
               setInfoPeople({ ...people, price: Number(value) });
             }}
             value={people.price ? people.price.toString() : ''}
+            onBlur={() => onEntriesValue()}
+          />
+
+          <TextInput
+            label="Prix de l'assurance :"
+            onChange={(value: string) => {
+              setInfoPeople({ ...people, assurrancePrice: value });
+            }}
+            value={people.assurrancePrice}
+            onBlur={() => onEntriesValue()}
+          />
+
+          <TextInput
+            label="Prix Total :"
+            onChange={(value: string) => {
+              setInfoPeople({ ...people, finalPrice: value });
+            }}
+            value={people.finalPrice}
+            onBlur={() => onEntriesValue()}
+            disabled
           />
         </div>
-        <div className={styles.contentButton}>
+        <div className={styles.contentButton} id="send">
           <div className={styles.dragAndDropContent}>
-            <p>Drag & Drop</p>
+            Drag & Drop
+            <input
+              type="file"
+              className={styles.inputFile}
+              accept=".pdf"
+              onChange={trySomething}
+              id="file"
+            />
           </div>
           <div className={styles.clustButton}>
-            <div className={styles.button}>
+            <div
+              className={styles.button}
+              onClick={onGeneratePDF}
+              aria-hidden="true"
+            >
               <p>Devis Assurance</p>
               <img className={styles.logoButton} src={images.pdf} alt="logo" />
             </div>
             <div
               className={styles.button}
-              onClick={onSubmit}
+              onClick={onCreateTicket}
               aria-hidden="true"
             >
               <p>Ticket Client</p>

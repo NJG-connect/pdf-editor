@@ -1,15 +1,17 @@
 interface People {
   id: string;
-  immatrucalation: string;
+  immatrucalation?: string;
   marque?: MarquesAuto;
-  modele: string;
+  modele?: string;
   assurance?: Assurances;
-  propriétaire: string;
-  email: string;
+  propriétaire?: string;
+  email?: string;
   dateDepot?: Date;
   dateRecuperation?: Date;
-  technicalControl: string;
+  technicalControl?: string;
   price?: number;
+  assurrancePrice?: string;
+  finalPrice?: string;
 }
 
 export enum MarquesAuto {
